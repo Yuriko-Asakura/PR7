@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+        img {
+            max-width: 500px;
+            max-height: 400px;
+            margin: 20px 0;
+            display: block; /* Для центрирования изображения */
+        }
+
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Синий цвет */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer; /* Указатель курсора */
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Темнее при наведении */
+        }
+    </style>
+</head>
+<body>
+<div>
+Список разделов
+</div>
+<a href="{% url 'about' %} " target="_blank" class="button">Сотрудники</a>
+<a href="{% url 'animal_page' %} " target="_blank" class="button">Животные</a>
+<a href="{% url 'category_page' %} " target="_blank" class="button">Категория</a>
+<a href="{% url 'customer_page' %} " target="_blank" class="button">Клиенты</a>
+<a href="{% url 'product_page' %} " target="_blank" class="button">Продукты</a>
+<a href="{% url 'order_detail_animal_page' %} " target="_blank" class="button">Детали заказ животных</a>
+<a href="{% url 'order_detail_product_page' %} " target="_blank" class="button">Детали заказов продуктов</a>
+<a href="{% url 'supply_page' %} " target="_blank" class="button">Поставщик12</a>
+<a href="{% url 'order_page' %} " target="_blank" class="button">Заказы</a>
+
+
+</body>
+</html>

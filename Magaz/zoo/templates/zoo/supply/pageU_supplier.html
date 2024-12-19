@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Обновление поставки</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745; /* Зеленый цвет */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h2>Обновление поставки</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="supply_id" value="{{ supply.supply_id }}"> 
+        <label for="product">Продукт:</label>
+        <select id="product" name="product">
+            {% for product in products %}
+                <option value="{{ product.product_id }}" {% if product.product_id == supply.product_id %}selected{% endif %}>{{ product.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="supplier">Поставщик:</label>
+        <select id="supplier" name="supplier">
+            {% for supplier in suppliers %}
+                <option value="{{ supplier.supplier_id }}" {% if supplier.supplier_id == supply.supplier_id %}selected{% endif %}>{{ supplier.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="supply_date">Дата поставки:</label>
+        <input type="date" id="supply_date" name="supply_date" value="{{ supply.supply_date }}"><br><br>
+        <label for="quantity">Количество:</label>
+        <input type="number" id="quantity" name="quantity" value="{{ supply.quantity }}"><br><br>
+        <button type="submit">Обновить</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Клиенты</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .animal-card {
+            display: inline-block;
+            margin: 10px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+        }
+
+        .animal-card img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .animal-card h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .animal-card p {
+            margin: 5px 0;
+        }
+
+        .animal-card a {
+            display: block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .animal-card a:hover {
+            background-color: #0069d9;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 8px 12px;
+            background-color: #ccc;
+            color: #333;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .pagination a:hover {
+            background-color: #999;
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+        img {
+            max-width: 500px;
+            max-height: 400px;
+            margin: 20px 0;
+            display: block; /* Для центрирования изображения */
+        }
+
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Синий цвет */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer; /* Указатель курсора */
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Темнее при наведении */
+        }
+    </style>
+</head>
+<body>
+    <h1>Клиенты</h1>
+    <div class="buttons">
+        <a href="{% url 'C_customer' %} " target="_blank" class="button">Добавить</a>
+    </div>
+    <div class="customer-cards">
+        {% for customer in customers %}
+        <div class="customer-card">
+            <h2>{{ customer.1 }} {{ customer.2 }}</h2>
+            <p>Email: {{ customer.3 }}</p>
+            <p>Телефон: {{ customer.4 }}</p>
+            <p>Адрес: {{ customer.5 }}</p>
+            <a href="{% url 'delete_customer' customer.0 %}" target="_blank" class="button">Удалить</a>
+            <a href="{% url 'update_customer' customer.0 %}" target="_blank" class="button">Обновить</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if customers.has_previous %}
+                <a href="?page={{ customers.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ customers.number }} of {{ customers.paginator.num_pages }}
+            </span>
+
+            {% if customers.has_next %}
+                <a href="?page={{ customers.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>

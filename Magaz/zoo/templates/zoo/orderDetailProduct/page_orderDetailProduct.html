@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Детали заказов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .animal-card {
+            display: inline-block;
+            margin: 10px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+        }
+
+        .animal-card img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .animal-card h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .animal-card p {
+            margin: 5px 0;
+        }
+
+        .animal-card a {
+            display: block;
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .animal-card a:hover {
+            background-color: #0069d9;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 8px 12px;
+            background-color: #ccc;
+            color: #333;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .pagination a.active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .pagination a:hover {
+            background-color: #999;
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .image-container {
+            text-align: center;
+        }
+
+        img {
+            max-width: 500px;
+            max-height: 400px;
+            margin: 20px 0;
+            display: block; /* Для центрирования изображения */
+        }
+
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Синий цвет */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer; /* Указатель курсора */
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Темнее при наведении */
+        }
+    </style>
+</head>
+<body>
+    <h1>Детали заказов</h1>
+    <div class="buttons">
+        <a href="{% url 'C_order_detail_product' %} " target="_blank" class="button">Добавить</a>
+    </div>
+    <div class="order_detail_product-cards">
+        {% for order_detail_product in order_detail_products %}
+        <div class="order_detail_product-card">
+            <h2>Деталь заказа #{{ order_detail_product.0 }}</h2>
+            <p>Заказ: {{ order_detail_product.1 }}</p>
+            <p>Продукт: {{ order_detail_product.2 }}</p>
+            <p>Количество: {{ order_detail_product.3 }}</p>
+            <p>Цена: {{ order_detail_product.4 }} рублей</p>
+            <a href="{% url 'delete_order_detail_product' order_detail_product.0 %}" target="_blank" class="button">Удалить</a>
+            <a href="{% url 'update_order_detail_product' order_detail_product.0 %}" target="_blank" class="button">Обновить</a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        <span class="step-links">
+            {% if order_detail_products.has_previous %}
+                <a href="?page={{ order_detail_products.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ order_detail_products.number }} of {{ order_detail_products.paginator.num_pages }}
+            </span>
+
+            {% if order_detail_products.has_next %}
+                <a href="?page={{ order_detail_products.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>
