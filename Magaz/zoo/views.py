@@ -1119,7 +1119,9 @@ def C_supply(request):
 
         # Создание SQL-запроса для вставки данных
         sql = """
-            INSERT INTO supplies (product_id, supplier_id, supply_date, quantity) 
+            INSERT INTO supplies (
+            product_id, supplier_id, 
+            supply_date, quantity) 
             VALUES (%s, %s, %s, %s)
         """
         data = (product_id, supplier_id, supply_date, quantity)
@@ -1174,11 +1176,16 @@ def delete_supply(request, supply_id):
 def update_supply(request, supply_id):
     if request.method == 'POST':
         # Получение данных из формы
-        product_id = request.POST.get('product')
-        supplier_id = request.POST.get('supplier')
-        supply_date = request.POST.get('supply_date')
-        quantity = request.POST.get('quantity')
-        supply_id = request.POST.get('supply_id')  # Получаем supply_id из формы
+        product_id = (
+            request.POST.get('product'))
+        supplier_id = (
+            request.POST.get('supplier'))
+        supply_date = (
+            request.POST.get('supply_date'))
+        quantity = (
+            request.POST.get('quantity'))
+        supply_id = (
+            request.POST.get('supply_id'))  # Получаем supply_id из формы
 
         # Подключение к базе данных
         conn = psycopg2.connect(
