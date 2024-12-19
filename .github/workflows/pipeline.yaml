@@ -3,11 +3,11 @@ name: Check Style Code
 on:
   push:
     branches:
-      - new_brench
+      - new_branch
 
   pull_request:
     branches:
-      - new_brench
+      - new_branch
 
 jobs:
   checkstyle_progject:
